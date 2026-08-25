@@ -1,0 +1,19 @@
+services:
+  maps-scraper:
+    build: .
+    container_name: maps-scraper
+    restart: unless-stopped
+    ports:
+      - "3010:3000"
+    environment:
+      - PORT=3000
+    # Uncomment and set this to your n8n instance's Docker network name so
+    # n8n can reach this service by container name (e.g. http://maps-scraper:3000)
+    # instead of a public IP/port. Only needed if n8n also runs in Docker
+    # on the same host.
+    # networks:
+    #   - n8n_default
+
+# networks:
+#   n8n_default:
+#     external: true
