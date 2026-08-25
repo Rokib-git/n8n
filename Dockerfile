@@ -9,6 +9,11 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install --omit=dev
 
+# Belt-and-suspenders: even with the version pinned exactly to match this
+# base image's tag, explicitly (re)install the matching browser binary so a
+# future version bump in package.json can't silently break this again.
+RUN npx playwright install --with-deps chromium
+
 COPY server.js ./
 
 ENV PORT=3000
